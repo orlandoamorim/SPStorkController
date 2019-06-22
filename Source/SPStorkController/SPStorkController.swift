@@ -81,4 +81,18 @@ public enum SPStorkController {
         }
         return nextResponder as? UIViewController
     }
+    
+    static public func updatePresentingControllerHeight(parent controller: UIViewController, customHeight: CGFloat?, completion: ((Bool) -> Void)? = nil) {
+        if let presentationController = controller.presentedViewController?.presentationController as? SPStorkPresentationController {
+            presentationController.customHeight = customHeight
+            presentationController.updatePresentingControllerHeight(completion: completion)
+        }
+    }
+    
+    static public func updatePresentingControllerHeight(modal controller: UIViewController, customHeight: CGFloat?, completion: ((Bool) -> Void)? = nil) {
+        if let presentationController = controller.presentationController as? SPStorkPresentationController {
+            presentationController.customHeight = customHeight
+            presentationController.updatePresentingControllerHeight(completion: completion)
+        }
+    }
 }

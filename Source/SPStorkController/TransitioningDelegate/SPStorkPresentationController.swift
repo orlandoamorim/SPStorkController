@@ -376,6 +376,21 @@ extension SPStorkPresentationController {
         self.updateSnapshot()
     }
     
+    func updatePresentingControllerHeight(completion: ((Bool) -> Void)? = nil) {
+        guard !self.startDismissing, let presentedView = self.presentedView else { return }
+        let frameOfPresentedViewInContainerView = self.frameOfPresentedViewInContainerView
+        UIView.animate(
+            withDuration: 0.6,
+            delay: 0,
+            usingSpringWithDamping: 1,
+            initialSpringVelocity: 1,
+            options: .curveEaseOut,
+            animations: {
+                presentedView.frame = frameOfPresentedViewInContainerView
+                presentedView.layoutIfNeeded()
+        }, completion: completion)
+    }
+    
     func setIndicator(style: SPStorkIndicatorView.Style) {
         self.indicatorView.style = style
     }
